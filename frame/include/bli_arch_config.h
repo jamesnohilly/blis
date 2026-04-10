@@ -160,6 +160,11 @@ INSERT_GENTCONF
 #include "bli_family_power.h"
 #endif
 
+// -- IBM zArch families --
+#ifdef BLIS_FAMILY_ZARCH
+#include "bli_family_zarch.h"
+#endif
+
 // -- IBM Power architectures --
 
 #ifdef BLIS_FAMILY_POWER10
@@ -170,6 +175,12 @@ INSERT_GENTCONF
 #endif
 #ifdef BLIS_FAMILY_POWER7
 #include "bli_family_power7.h"
+#endif
+
+// -- IBM zArch architectures --
+
+#ifdef BLIS_FAMILY_Z15
+#include "bli_family_z15.h"
 #endif
 
 // -- IBM BG/Q --
