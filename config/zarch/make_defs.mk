@@ -63,26 +63,14 @@ endif
 # Flags specific to optimized kernels.
 CKOPTFLAGS     := $(COPTFLAGS) -O3
 ifeq ($(CC_VENDOR),gcc)
-CKVECFLAGS     := -mzarch
+CKVECFLAGS     := -mzarch -mzvector
 else
-ifeq ($(CC_VENDOR),clang)
-CKVECFLAGS     := -mzarch
-else
-$(error gcc or clang is required for this configuration.)
-endif
+$(error gcc is required for this configuration.)
 endif
 
 # Flags specific to reference kernels.
 CROPTFLAGS     := $(CKOPTFLAGS)
-ifeq ($(CC_VENDOR),gcc)
 CRVECFLAGS     := $(CKVECFLAGS)
-else
-ifeq ($(CC_VENDOR),clang)
-CRVECFLAGS     := $(CKVECFLAGS)
-else
-CRVECFLAGS     := $(CKVECFLAGS)
-endif
-endif
 
 # Store all of the variables here to new variables containing the
 # configuration name.
