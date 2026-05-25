@@ -35,5 +35,9 @@
 //#ifndef BLIS_KERNEL_DEFS_H
 //#define BLIS_KERNEL_DEFS_H
 
+// -- REGISTER BLOCK SIZES (FOR REFERENCE KERNELS) ----------------------------
+
+#define BLIS_MR_d   8
+#define BLIS_NR_d   4
 
 //#endif
