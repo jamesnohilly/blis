@@ -31,3 +31,8 @@
    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
+
+// -- level-3 ------------------------------------------------------------------
+
+// gemm (intrinsics 8x4)
+GEMM_UKR_PROT( double, d, gemm_z15_intr_8x4 )
