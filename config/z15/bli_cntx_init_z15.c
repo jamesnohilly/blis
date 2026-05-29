@@ -41,16 +41,38 @@ void bli_cntx_init_z15( cntx_t* cntx )
 		// Set default kernel blocksizes and functions.
 		bli_cntx_init_z15_ref( cntx );
 
+		// Update the context with optimized native gemm micro-kernels.
+		bli_cntx_set_ukrs
+		(
+			cntx,
+
+			// level-3
+			BLIS_GEMM_UKR, BLIS_DOUBLE, bli_dgemm_z15_intr_8x4,
+
+			BLIS_VA_END
+		);
+
+		// Update the context with storage preferences.
+		bli_cntx_set_ukr_prefs
+		(
+			cntx,
+
+			// level-3
+			BLIS_GEMM_UKR_ROW_PREF, BLIS_DOUBLE, FALSE,
+
+			BLIS_VA_END
+		);
+
 		// -------------------------------------------------------------------------
 
 		// Initialize level-3 blocksize objects with architecture-specific values.
-		// 																			 float double single cplx double cplx
-    //                                           s      d      c      z
-    bli_blksz_init_easy( &blkszs[ BLIS_MR ],     8,     8,   -1,   -1 ); // register blocksizes rows
-    bli_blksz_init_easy( &blkszs[ BLIS_NR ],     8,     4,   -1,   -1 ); // register blocksizes columns
-		bli_blksz_init_easy( &blkszs[ BLIS_MC ],   128,   128,   -1,   -1 ); // cache blocksizes rows
-    bli_blksz_init_easy( &blkszs[ BLIS_KC ],   256,   256,   -1,   -1 ); // cache blocksizes inner dim
-    bli_blksz_init_easy( &blkszs[ BLIS_NC ],  2048,  2048,   -1,   -1 ); // cache blocksizes columns
+		// 										float double single cplx double cplx
+		//                                         s      d      c      z
+		bli_blksz_init_easy( &blkszs[ BLIS_MR ],  -1,     8,   -1,   -1 ); // register blocksizes rows
+		bli_blksz_init_easy( &blkszs[ BLIS_NR ],  -1,     4,   -1,   -1 ); // register blocksizes columns
+		bli_blksz_init_easy( &blkszs[ BLIS_MC ],  -1,   320,   -1,   -1 ); // cache blocksizes rows
+		bli_blksz_init_easy( &blkszs[ BLIS_KC ],  -1,   384,   -1,   -1 ); // cache blocksizes inner dim
+		bli_blksz_init_easy( &blkszs[ BLIS_NC ],  -1,  4096,   -1,   -1 ); // cache blocksizes columns
 
 		// Update the context with the current architecture's register and cache
 		// blocksizes (and multiples) for native execution.
