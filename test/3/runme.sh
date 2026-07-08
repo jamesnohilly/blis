@@ -6,8 +6,8 @@ out_root="output"
 delay=0.1
 
 # Bind threads to processors.
-#export OMP_PROC_BIND=true
-#export GOMP_CPU_AFFINITY="0 2 4 6 8 10 12 14 16 18 20 22 1 3 5 7 9 11 13 15 17 19 21 23"
+export OMP_PROC_BIND=true
+export GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7"
 #export GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103"
 
 # ------------------
@@ -26,11 +26,11 @@ sys="blis"
 
 if [ ${sys} = "blis" ]; then
 
-	export GOMP_CPU_AFFINITY="0-3"
+	# export GOMP_CPU_AFFINITY="0-3"
 
 	numactl=""
 	threads="jc1ic1jr1_st
-	         jc2ic2jr1_mt"
+	         jc4ic4jr1_mt"
 	#psr_st="40 1000 40"
 	#psr_mt="40 4000 40"
 
@@ -94,15 +94,15 @@ elif [ ${sys} = "ul2128" ]; then
 fi
 
 # Datatypes to test.
-test_dts="s d c z"
-#test_dts="d"
+#test_dts="s d c z"
+test_dts="d"
 
 # Operations to test.
-test_ops="gemm_nn hemm_ll herk_ln trmm_llnn trsm_runn"
-#test_ops="gemm_nn"
+#test_ops="gemm_nn hemm_ll herk_ln trmm_llnn trsm_runn"
+test_ops="gemm_nn"
 
 # Implementations to test.
-test_impls="blis"
+test_impls="blis openblas"
 #test_impls="openblas"
 #test_impls="vendor"
 #test_impls="eigen"
@@ -113,7 +113,7 @@ if [ "${impls}" = "all" ]; then
 fi
 
 # Number of repeats per problem size.
-nrepeats=3
+nrepeats=5
 
 # The induced method to use ('auto', 'native', or '1m') for executing
 # complex-domain level-3 operations.

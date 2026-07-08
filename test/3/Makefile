@@ -89,8 +89,8 @@ endif
 HOME_LIB_PATH  := $(HOME)/flame/lib
 
 # OpenBLAS
-OPENBLAS_LIB   := $(HOME_LIB_PATH)/libopenblas.a
-OPENBLASP_LIB  := $(HOME_LIB_PATH)/libopenblasp.a
+OPENBLAS_LIB   := /lib64/libopenblas.so
+OPENBLASP_LIB  := /lib64/libopenblasp.so
 
 # ATLAS
 #ATLAS_LIB      := $(HOME_LIB_PATH)/libf77blas.a \
