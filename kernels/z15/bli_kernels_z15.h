@@ -34,5 +34,6 @@
 
 // -- level-3 ------------------------------------------------------------------
 
-// gemm (intrinsics 8x4)
+// gemm (intrinsics)
+GEMM_UKR_PROT( float,  s, gemm_z15_intr_16x4 )
 GEMM_UKR_PROT( double, d, gemm_z15_intr_8x4 )
